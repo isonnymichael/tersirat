@@ -25,7 +25,9 @@ SECRET_KEY = '^_@&jyc*gpgugx5md#sujpn3m7tglj--3%$xns5u535cxe*_v+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'https://tersirat.herokuapp.com/'
+]
 
 
 # Application definition
