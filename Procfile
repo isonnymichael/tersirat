@@ -1,1 +1,3 @@
-web: gunicorn tersirat.wsgi
+web: gunicorn tersirat.wsgi:application --log-file -
+python manage.py collectstatic --noinput
+manage.py migrate
