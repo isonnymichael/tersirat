@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import dj_database_url
+import django_heroku
+import os
 
 from pathlib import Path
 
@@ -23,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '^_@&jyc*gpgugx5md#sujpn3m7tglj--3%$xns5u535cxe*_v+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'https://tersirat.herokuapp.com/'
@@ -49,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'tersirat.urls'
@@ -78,9 +82,18 @@ WSGI_APPLICATION = 'tersirat.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+PRODUCTION = os.environ.get('DATABASE_URL') is not None
+if PRODUCTION:
+    # KALAU SUDAH BERJALAN, kamu bisa uncomment bagian DEBUG, ALLOWED_HOSTS, dan DATABASES.
+    # For increased security.
+    #DEBUG = False
+    #ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'NAMA_APP.herokuapp.com']
+    #DATABASES['default'] = dj_database_url.config()
+    SECURE_SSL_REDIRECT = True
 
 
 # Password validation
@@ -119,4 +132,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+django_heroku.settings(locals())
