@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import dj_database_url
 import django_heroku
+import pymongo
 
 from pathlib import Path
 
@@ -82,13 +83,27 @@ WSGI_APPLICATION = 'tersirat.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'tersirat_db',
+#         'HOST':'127.0.0.1',
+#         'PORT':27017
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+   'default': {
+        'ENGINE': 'djongo',
+        "CLIENT": {
+           "name": 'tersirat_db',
+           "host": 'mongodb+srv://isonnymichael:<password>@gabut.glvly.mongodb.net/<dbname>?retryWrites=true&w=majority',
+           "username": 'isonnymichael',
+           "password": 'passwordnya2105',
+           "authMechanism": "SCRAM-SHA-1"
+        }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
