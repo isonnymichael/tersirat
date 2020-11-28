@@ -30,6 +30,12 @@ SECRET_KEY = '^_@&jyc*gpgugx5md#sujpn3m7tglj--3%$xns5u535cxe*_v+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Custom
+API_KEY_TRANSLATOR = 'NqXqcSvDC1mfa9tpYxFKFopXGfx3TekmL8oT5XXblSUa'
+API_KEY_TONE = '1vNXaGrT_3XLWr3i974NfVocBpQKxr3fkeWmZNCnNs6i'
+URL_TRANSLATOR = 'https://api.jp-tok.language-translator.watson.cloud.ibm.com/instances/804f3409-57b8-4403-bcc1-8d58c1be9d2a'
+URL_TONE = 'https://api.jp-tok.tone-analyzer.watson.cloud.ibm.com/instances/a534bdee-20ff-452f-9018-cf4e5cb12d79'
+
 ALLOWED_HOSTS = [
     'https://tersirat.herokuapp.com/',
     '*'
